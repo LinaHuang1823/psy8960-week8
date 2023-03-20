@@ -1,0 +1,34 @@
+---
+title: "PSY 8960 Week 8 Project"
+author: "Lina Huang"
+date: "*2023-03-20*"
+output: html_document
+---
+
+# **Reproducible Image and Online Resources**
+An image of this project as of date can be accessed by [](https://mybinder.org/v2/gh/LinaHuang1823/psy8960-week8.git/HEAD).
+
+An interactive web app is available by clicking this link instead.
+
+# **Script Settings and Resources**
+This chunk is used to set working directory and load libraries. I load library tidyverse and conflicted for plot below.
+```{r setup, eval=FALSE}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+library(tidyverse)
+library(conflicted)
+library(knitr)
+library(magrittr)
+```
+
+
+# **Data Import and Cleaning**
+```{r cars}
+
+```
+
+
+```{r}
+
+```
+
+
