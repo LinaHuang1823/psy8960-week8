@@ -12,7 +12,7 @@ An interactive web app is available by clicking this link instead.
 
 # **Script Settings and Resources**
 This chunk is used to set working directory and load libraries. I load library tidyverse and conflicted for plot below.
-```{r setup, eval=FALSE}
+```{r setup, echo = TRUE, results = 'hide'}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 library(conflicted)
@@ -22,13 +22,24 @@ library(magrittr)
 
 
 # **Data Import and Cleaning**
-```{r cars}
+This chunk is used to import data and covert data to their appropriate type: time to POSIXCT,gender and condition to factor. Also It reversed code q5 as required.
+```{r data-import}
+library(dplyr)
+week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
+  mutate(timeStart = ymd_hms(timeStart))%>%
+  mutate(condition = factor(condition, levels = c("A","B","C")))%>%
+  mutate(gender = factor(gender, levels = c("M","F")))%>%
+  mutate(q5=max(q5)+1-q5)
 
 ```
 
+# **Visualization**
+Created table with kable and use ggplot to visualize the mean of q1:q6 and q8:q10
+```{r,echo=FALSE}
+
+
+```
 
 ```{r}
 
 ```
-
-
