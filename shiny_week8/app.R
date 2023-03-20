@@ -2,48 +2,48 @@ library(shiny)
 library(tidyverse)
 library(rsconnect)
 
-
-week8_tbl<-readRDS("../shiny/week8_tbl.rds")
+#load data
+week8_tbl<-readRDS("../shiny/week8_tbl.rds") 
 
 ui <- fluidPage(
-  titlePanel("Mean Scores on Q1-Q6 vs Mean Scores on Q8-Q10"),
+  titlePanel("Mean Scores on Q1-Q6 vs Mean Scores on Q8-Q10"), # Setting title of the page
   sidebarLayout(
     sidebarPanel(
-      selectInput(inputId = "gender",
+      selectInput(inputId = "gender", # Creating a dropdown menu for selecting gender
                   label = "Select Gender",
                   choices = c("All", "Male", "Female"),
                   selected = "All"),
-      selectInput(inputId = "error",
+      selectInput(inputId = "error", # Creating a dropdown menu for displaying/suppressing error band
                   label = "Select Error Band",
                   choices = c("Display Error Band", "Suppress Error Band"),
                   selected = "Display Error Band"),
-      selectInput(inputId = "date",
+      selectInput(inputId = "date", # Creating a dropdown menu for including/excluding assessments after August 1, 2017
                   label = "Include Assessments After August 1, 2017?",
                   choices = c("Include", "Exclude"),
                   selected = "Include")
     ),
     mainPanel(
-      plotOutput(outputId = "scatterplot")
+      plotOutput(outputId = "scatterplot") # Generating the scatterplot output
     )
   )
 )
-
+# Define the server function with input and output arguments
 server <- function(input, output) {
   
   
-  # Filter data based on user input using if and else statement
+# Create a reactive expression to filter data based on user input using if and else statement
   filtered_data <- reactive({
-    if (input$gender == "All") {
+    if (input$gender == "All") { #If the user selects "All" genders, return the entire data table
       data<- week8_tbl
-    } else {
+    } else {    #Otherwise, filter the data by the selected gender
       data <- dplyr::filter(week8_tbl, gender == input$gender)
     }
-    if (input$date == "Include") {
+    if (input$date == "Include") { # If the user selects to include all dates, return the entire data table
       data<- week8_tbl
-    } else {  
-      data <- dplyr::filter(week8_tbl,timeEnd >= "2017-08-01")
+    } else {   # Otherwise, filter the data to only include dates after August 1, 2017
+      data <- dplyr::filter(week8_tbl,timeEnd >= "2017-08-01") 
     }
-    return(data)
+    return(data) # Return the filtered data
   })
   
   # Create scatterplot with renderplot for interactive effect
