@@ -3,7 +3,7 @@ library(tidyverse)
 library(rsconnect)
 
 #load data
-week8_tbl<-readRDS("../shiny/week8_tbl.rds") 
+week8_tbl<-readRDS("../shiny_week8/week8_tbl.rds") 
 
 ui <- fluidPage(
   titlePanel("Mean Scores on Q1-Q6 vs Mean Scores on Q8-Q10"), # Setting title of the page

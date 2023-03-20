@@ -72,6 +72,6 @@ The correlation between the two mean scores is `r correlation$estimate`. The p-v
 This section used saveRDS to export the data to the shiny folder.
 ```{r export-data}
 
-saveRDS(week8_tbl,"../shiny/week8_tbl.rds")
+saveRDS(week8_tbl,"../shiny_week8/week8_tbl.rds")
 
 ```
