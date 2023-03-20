@@ -18,13 +18,13 @@ library(tidyverse)
 library(conflicted)
 library(knitr)
 library(magrittr)
+#library(dplyr)
 ```
 
 
 # **Data Import and Cleaning**
 This chunk is used to import data and covert data to their appropriate type: time to POSIXCT,gender and condition to factor. Also It reversed code q5 as required.
 ```{r data-import}
-library(dplyr)
 week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
   mutate(timeStart = ymd_hms(timeStart))%>%
   mutate(condition = factor(condition, levels = c("A","B","C")))%>%
@@ -34,7 +34,7 @@ week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
 ```
 
 # **Visualization**
-Created table with kable and use ggplot to visualize the mean of q1:q6 and q8:q10
+Created table with kable to display q1 to q6. Use ggplot to visualize the mean of q1:q6 and q8:q10
 ```{r tables, echo=FALSE}
 # display Q1-Q6 data with pagination
 week8_tbl %>% 
@@ -47,7 +47,7 @@ week8_tbl %>%
   # Calculate the mean scores for each participant
   mutate(Q1_Q6_Mean = rowMeans(select(., q1:q6)),
          Q8_Q10_Mean = rowMeans(select(., q8:q10))) %>%
-  # Create a scatterplot with regression line and error band
+# Create a scatterplot with regression line and error band
   ggplot(aes(x = Q1_Q6_Mean, y = Q8_Q10_Mean)) +
   geom_point() +
   geom_smooth(method = "lm", se = TRUE, color = "purple") +
@@ -55,9 +55,16 @@ week8_tbl %>%
        x = "Mean Scores on Q1-Q6",
        y = "Mean Scores on Q8-Q10") 
 
-
 ```
 
+# **Analysis**
+This section is used to calculate the correlations between the mean of q1:q6 and q8:q10. 
 ```{r}
+Q1_Q6Mean <- rowMeans(select(week8_tbl, q1:q6))
+Q8_Q10Mean <- rowMeans(select(week8_tbl, q8:q10))
+
+correlation<-cor.test(Q1_Q6Mean,Q8_Q10Mean)
 
 ```
+The correlation between the two mean scores is `r correlation$estimate`. The p-value of `r correlation$p.value` indicating that there is no statistically significant evidence to reject the null hypothesis that true correlation is equal to 0.
+
