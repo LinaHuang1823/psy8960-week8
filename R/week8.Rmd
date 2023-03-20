@@ -23,7 +23,7 @@ library(magrittr)
 
 
 # **Data Import and Cleaning**
-This chunk is used to import data and covert data to their appropriate type: time to POSIXCT,gender and condition to factor. Also It reversed code q5 as required.
+This chunk is used to import data and covert data to their appropriate type: time to POSIXCT,gender and condition to factor. Also it reversed code q5 as required.
 ```{r data-import}
 week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
   mutate(timeStart = ymd_hms(timeStart))%>%
@@ -34,7 +34,7 @@ week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
 ```
 
 # **Visualization**
-Created table with kable to display q1 to q6. Use ggplot to visualize the mean of q1:q6 and q8:q10
+This section created table with kable to display q1 to q6; and use ggplot to visualize the mean of q1:q6 and q8:q10.
 ```{r tables, echo=FALSE}
 # display Q1-Q6 data with pagination
 week8_tbl %>% 
@@ -68,6 +68,8 @@ correlation<-cor.test(Q1_Q6Mean,Q8_Q10Mean)
 ```
 The correlation between the two mean scores is `r correlation$estimate`. The p-value of `r correlation$p.value` indicating that there is no statistically significant evidence to reject the null hypothesis that true correlation is equal to 0.
 
+# **Data Export**
+This section used saveRDS to export the data to the shiny folder.
 ```{r export-data}
 
 saveRDS (week8_tbl,"../shiny/week8_tbl.rds")
