@@ -1,0 +1,1 @@
+install.packages(c("tidyverse","knitr","magrittr","conflicted"))

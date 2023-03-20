@@ -31,7 +31,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   
-  # Filter data based on user input
+  # Filter data based on user input using if and else statement
   filtered_data <- reactive({
     if (input$gender == "All") {
       data<- week8_tbl
@@ -46,7 +46,7 @@ server <- function(input, output) {
     return(data)
   })
   
-  # Create scatterplot
+  # Create scatterplot with renderplot for interactive effect
   output$scatterplot <- renderPlot({
     filtered_data() %>%
       # Calculate the mean scores for each participant
@@ -66,3 +66,4 @@ server <- function(input, output) {
 }
 
 shinyApp(ui = ui, server = server)
+
