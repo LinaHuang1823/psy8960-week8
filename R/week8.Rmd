@@ -35,7 +35,25 @@ week8_tbl<-read_csv("../data/week3.csv", show_col_types = FALSE)%>%
 
 # **Visualization**
 Created table with kable and use ggplot to visualize the mean of q1:q6 and q8:q10
-```{r,echo=FALSE}
+```{r tables, echo=FALSE}
+# display Q1-Q6 data with pagination
+week8_tbl %>% 
+  select(q1:q6) %>% 
+  kable(align="cccccc")
+  
+
+# scatterplot with OLS regression line and shaded error band
+week8_tbl %>%
+  # Calculate the mean scores for each participant
+  mutate(Q1_Q6_Mean = rowMeans(select(., q1:q6)),
+         Q8_Q10_Mean = rowMeans(select(., q8:q10))) %>%
+  # Create a scatterplot with regression line and error band
+  ggplot(aes(x = Q1_Q6_Mean, y = Q8_Q10_Mean)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "purple") +
+  labs(title = "Mean Scores on Q1-Q6 vs Mean Scores on Q8-Q10",
+       x = "Mean Scores on Q1-Q6",
+       y = "Mean Scores on Q8-Q10") 
 
 
 ```
