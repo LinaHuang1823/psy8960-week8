@@ -6,12 +6,12 @@ output: html_document
 ---
 
 # **Reproducible Image and Online Resources**
-An image of this project as of date can be accessed by [clicking here](https://hub.ovh2.mybinder.org/user/linahuang1823-psy8960-week8-w1lutnwx/lab/tree/R).
+An image of this project as of date can be accessed by [clicking this link](https://mybinder.org/v2/gh/LinaHuang1823/psy8960-week8.git/HEAD?urlpath=rstudio).
 
-An interactive web app is available by[clicking here](https://linahuang.shinyapps.io/shiny_week8/?_ga=2.182504934.1921968239.1679072005-175150872.1678901768).
+An interactive web app is available by [clicking this link instead](https://linahuang.shinyapps.io/shiny_week8/?_ga=2.182504934.1921968239.1679072005-175150872.1678901768).
 
 # **Script Settings and Resources**
-This chunk is used to set working directory and load libraries. I load library tidyverse and conflicted for plot below.
+This chunk is used to set working directory and load libraries.I loaded library tidyverse and conflicted for plot below.
 ```{r setup, echo = TRUE, results = 'hide'}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
